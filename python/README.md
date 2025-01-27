@@ -1,6 +1,6 @@
 # Running tests
 
-```
+```bash
 # Install Python dependencies
 
 $ python -m venv .venv 
@@ -15,7 +15,6 @@ $ pip install -r requirements.txt
 $ playwright install chromium
 
 # Run the tests
-# TODO: fix the URL # Done
 $ pytest -vs --browser=chromium --slowmo=1000 --headed --base-url=https://f.se1.hr.dmerej.info/
 ```
 
