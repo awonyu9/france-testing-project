@@ -18,14 +18,16 @@ def test_create_existing_user_pom(page):
                                )
     add_new_employee_page.add()
 
-    assert page.is_visible(f"td:has-text('{user_name}')")
-    assert page.is_visible(f"td:has-text('{user_email}')")
+    list_employees_page = ListEmployeesPage(page)
+    list_employees_page.navigate()
+
+    assert list_employees_page.is_name_visible(user_name)
+    assert list_employees_page.is_email_visible(user_email)
 
     add_new_employee_page.navigate()
     add_new_employee_page.fill(user_name, user_email, user_address1, user_address2, user_city, user_zip, user_hiring_date, user_job_title)
     add_new_employee_page.add()
 
-    list_employees_page = ListEmployeesPage(page)
     list_employees_page.navigate()
     email_occurrences = list_employees_page.count_email_occurrences(user_email)
     assert email_occurrences == 1, f"Expected 1 occurrence of email '{user_email}', but found {email_occurrences}. ""The user may have been created twice."

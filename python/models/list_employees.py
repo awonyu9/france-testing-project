@@ -18,3 +18,9 @@ class ListEmployeesPage:
 
     def count_email_occurrences(self, email):
         return self.page.locator(f"text={email}").count()
+    
+    def is_name_visible(self, name):
+        return self.page.is_visible(f"td:has-text('{name}')")
+    
+    def is_email_visible(self, email):
+        return self.page.is_visible(f"td:has-text('{email}')")
