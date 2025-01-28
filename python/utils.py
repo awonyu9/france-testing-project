@@ -40,3 +40,11 @@ def create_team(page, team_name):
     name_input = page.locator('input[name="name"]')
     name_input.fill(team_name)
     page.click("text='Add'")
+
+def get_employeeId_by_email(page, email):
+    page.goto("/")
+    page.goto("/employees")
+    edit_button = page.locator(f"tr:has(td:text('{user_email}')) a.btn.btn-primary")
+    employee_url = edit_button.get_attribute("href")
+    employee_id = employee_url.split("/")[-1]
+    print(f"Employee ID: {employee_id}")
