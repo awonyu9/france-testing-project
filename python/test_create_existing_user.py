@@ -1,5 +1,5 @@
-def getPageInput(page, name):
-    return page.locator('input[name="' + name + '"]')
+from utils import getPageInput
+
 
 def test_create_existing_user(page):
     user_name = "John Doe"
@@ -45,6 +45,6 @@ def test_create_existing_user(page):
     hiring_date_input.fill(user_hiring_date)
     job_title_input.fill(user_job_title)
     page.click("text='Add'")
-    
+
     email_occurrences = page.locator(f"text={user_email}").count()
     assert email_occurrences == 1, f"Expected 1 occurrence of email '{user_email}', but found {email_occurrences}. ""The user may have been created twice."

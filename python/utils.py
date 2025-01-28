@@ -1,4 +1,6 @@
-from test_create_existing_user import getPageInput
+def getPageInput(page, name):
+    return page.locator('input[name="' + name + '"]')
+
 
 def create_user(page, name, email, addr1, addr2, city, zip, hiring, job):
     user_name = name
@@ -11,7 +13,7 @@ def create_user(page, name, email, addr1, addr2, city, zip, hiring, job):
     user_job_title = job
 
     page.goto("https://f.se1.hr.dmerej.info/add_employee")
-    
+
     name_input = getPageInput(page, "name")
     email_input = getPageInput(page, "email")
     address1_input = getPageInput(page, "address_line1")
@@ -30,6 +32,7 @@ def create_user(page, name, email, addr1, addr2, city, zip, hiring, job):
     hiring_date_input.fill(user_hiring_date)
     job_title_input.fill(user_job_title)
     page.click("text='Add'")
+
 
 def create_team(page, team_name):
     page.goto("/")
