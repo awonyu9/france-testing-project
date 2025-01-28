@@ -1,4 +1,5 @@
 from models.add_new_employee import AddNewEmployeePage
+from models.list_employees import ListEmployeesPage
 from models.update_contract import UpdateContractPage
 
 
@@ -19,14 +20,9 @@ def test_can_update_hiring_date_pom(page):
                                )
     add_new_employee_page.add()
 
-    # need to navigate to employees
-    page.goto("/employees")
-    # list_employees_page = ListEmployeesPage(page)
-    # list_employees_page.navigate()
-
-    # then edit page
-    page.get_by_role("link", name="Edit").nth(0).click()
-    # list_employees_page.edit()
+    list_employees_page = ListEmployeesPage(page)
+    list_employees_page.navigate()
+    list_employees_page.edit_employee(0)
 
     update_contract_page = UpdateContractPage(page)
     update_contract_page.navigate()
