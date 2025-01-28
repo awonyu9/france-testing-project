@@ -1,33 +1,22 @@
-from models.add_new_employee import AddNewEmployeePage 
-from models.edit_address import EditAddressPage
-
-from utils import get_employeeId_by_email
-
+from models.list_employees import ListEmployeesPage
+from models.add_new_employee import AddNewEmployeePage
 
 def test_address2_not_become_address1_pom(page):
-    user_name = "John Doe"
-    user_email = "email@gmail.com"
-    user_address1 = "Address 1"
-    user_address2 = "Address 2"
-    user_city = "Paris"
-    user_zip = "75001"
-    user_hiring_date = "2025-01-17"
-    user_job_title = "Manager"
-
-    add_new_employee_page = AddNewEmployeePage(page)
+    add_new_employee_page = AddNewEmployeePage(
+        page)
     add_new_employee_page.navigate()
-    add_new_employee_page.fill(user_name, user_email, user_address1, user_address2, user_city, user_zip, user_hiring_date, user_job_title)
+    add_new_employee_page.fill("Mark Doe", "email@email.com", "address 1", "address 2", "Paris", "75017", "2025-01-28", "CEO")
     add_new_employee_page.add()
 
+    list_employees_page = ListEmployeesPage(page)
+    list_employees_page.navigate()
+    list_employees_page.edit_employee(0)
 
-    edit_address_page = EditAddressPage(page)
-    edit_address_page.navigate(get_employeeId_by_email(page, user_email))
-    address2 = edit_address_page.address2_input.input_value()
-    edit_address_page.update()    
-    
-    edit_address_page.navigate(get_employeeId_by_email(page, user_email))
+    page.locator('a[href$="address"]').click()
+    address2 = page.locator('input[name="address_line2"]').input_value()
+    page.click("text='Update'")
+    page.get_by_role("link", name="Update address").click()
 
-    address1 = edit_address_page.address1_input.input_value()
-    updated_address2 = edit_address_page.address1_input.input_value()
-
+    address1 = page.locator('input[name="address_line1"]').input_value()
+    updated_address2 = page.locator('input[name="address_line2"]').input_value()
     assert updated_address2 != address1, f"Address 2 ('{updated_address2}') unexpectedly matches Address 1 ('{address1}')."

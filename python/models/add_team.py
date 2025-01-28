@@ -4,9 +4,7 @@ from utils import getPageInput
 class AddTeamPage:
     def __init__(self, page):
         self.page = page
-
         self.name_input = getPageInput(page, "name")
-
         self.add_button = page.get_by_role("button", name="Add")
 
     def navigate(self):

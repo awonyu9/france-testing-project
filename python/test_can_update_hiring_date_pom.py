@@ -1,7 +1,9 @@
 from models.add_new_employee import AddNewEmployeePage
 from models.list_employees import ListEmployeesPage
+from models.update_contract import UpdateContractPage
 
-def test_create_existing_user_pom(page):
+
+def test_can_update_hiring_date_pom(page):
     user_name = "John Doe"
     user_email = "email@gmail.com"
     user_address1 = "Address 1"
@@ -20,14 +22,10 @@ def test_create_existing_user_pom(page):
 
     list_employees_page = ListEmployeesPage(page)
     list_employees_page.navigate()
+    list_employees_page.edit_employee(0)
 
-    assert list_employees_page.is_name_visible(user_name)
-    assert list_employees_page.is_email_visible(user_email)
+    update_contract_page = UpdateContractPage(page)
+    update_contract_page.navigate()
 
-    add_new_employee_page.navigate()
-    add_new_employee_page.fill(user_name, user_email, user_address1, user_address2, user_city, user_zip, user_hiring_date, user_job_title)
-    add_new_employee_page.add()
-
-    list_employees_page.navigate()
-    email_occurrences = list_employees_page.count_email_occurrences(user_email)
-    assert email_occurrences == 1, f"Expected 1 occurrence of email '{user_email}', but found {email_occurrences}. ""The user may have been created twice."
+    assert update_contract_page.hiring_date_input.is_enabled(
+    ), "Hiring date field is not enabled"
