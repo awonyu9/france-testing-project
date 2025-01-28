@@ -1,13 +1,3 @@
-import pytest
-
-@pytest.fixture(scope="function", autouse=True)
-def reset_database(page):
-    page.goto("/reset_db")
-    page.locator("button:has-text('proceed')").click()
-
-def page_locateInputName(page, name):
-    return page.locator(f"input[name='{name}']")
-    
 def test_create_team(page):
     # Create a team 
     page.goto("/")
