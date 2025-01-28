@@ -21,14 +21,10 @@ def test_create_team(page):
     assert page.is_visible(f"td:has-text('{team_name}')")
 
 def test_create_user_with_info(page):
-    page.goto("https://f.se1.hr.dmerej.info/")
     page.get_by_role("link", name="Add new employee").click()
     page.get_by_role("textbox", name="Name").click()
     page.get_by_role("textbox", name="Name").fill("Name")
     page.get_by_role("textbox", name="Email").click()
-    page.get_by_role("textbox", name="Email").fill("email@gmail.Com")
-    page.get_by_role("textbox", name="Email").press("ArrowLeft")
-    page.get_by_role("textbox", name="Email").press("ArrowLeft")
     page.get_by_role("textbox", name="Email").fill("email@gmail.com")
     page.locator("#id_address_line1").click()
     page.locator("#id_address_line1").fill("Test address 1")
@@ -45,4 +41,37 @@ def test_create_user_with_info(page):
 
     assert page.get_by_role("cell", name="Name", exact=True).is_visible()
     assert page.get_by_role("cell", name="email@gmail.com", exact=True).is_visible()
+
+def test_address2_become_address1(page):
+    page.get_by_role("link", name="Add new employee").click()
+    page.get_by_role("textbox", name="Name").click()
+    page.get_by_role("textbox", name="Name").fill("test")
+    page.locator("div").filter(has_text="Email").click()
+    page.get_by_role("textbox", name="Email").fill("test@gmail.com")
+    page.locator("#id_address_line1").click()
+    page.locator("#id_address_line1").fill("address1")
+    page.locator("#id_address_line2").click()
+    page.locator("#id_address_line1").fill("address2")
+    page.get_by_role("textbox", name="City").click()
+    page.get_by_role("textbox", name="City").fill("city")
+    page.get_by_role("spinbutton", name="Zip code").click()
+    page.get_by_role("spinbutton", name="Zip code").fill("75000")
+    page.get_by_role("textbox", name="Hiring date").fill("2025-01-15")
+    page.get_by_role("textbox", name="Job title").click()
+    page.get_by_role("textbox", name="Job title").fill("Tester")
+    page.get_by_role("button", name="Add").click()
+    page.get_by_role("link", name="Home").click()
+    page.get_by_role("link", name="List employees").click()
+    page.get_by_role("link", name="Edit").nth(0).click()
+    page.get_by_role("link", name="Update address").click()
+    page.get_by_role("button", name="Update").click()
+    address2 = page.locator("#id_address_line2").input_value()
+    page.get_by_role("link", name="Update address").click()
+
+    address1 = page.locator("#id_address_line1").input_value()
+    updated_address2 = page.locator("#id_address_line2").input_value()
+    assert updated_address2 != address1, f"Expected address2 to be '{address2}', but got '{updated_address2} equal to {address1}'"
+    
+
+
 
