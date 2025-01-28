@@ -1,4 +1,4 @@
-def test_create_team(page):
+def test_add_team(page):
     # Create a team 
     page.goto("/")
     page.goto("/add_team")
