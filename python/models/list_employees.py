@@ -15,3 +15,6 @@ class ListEmployeesPage:
     def delete_employee(self, index):
         employee_row = self.employees_rows.nth(index)
         employee_row.locator(self.delete_button).click()
+
+    def count_email_occurrences(self, email):
+        return self.page.locator(f"text={email}").count()
