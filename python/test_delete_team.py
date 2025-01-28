@@ -34,7 +34,7 @@ def test_delete_team(page):
     # go to employees list
     page.goto("/employees")
 
-    assert page.get_by_role("cell", name="bob", exact=True).is_visible()
-    assert page.get_by_role("cell", name="bob@gmail.com", exact=True).is_visible()
-    assert page.get_by_role("cell", name="alice", exact=True).is_visible()
-    assert page.get_by_role("cell", name="alice@gmail.com", exact=True).is_visible()
+    assert page.get_by_role("cell", name="bob", exact=True).is_visible(), "Bob is not visible"
+    assert page.get_by_role("cell", name="bob@gmail.com", exact=True).is_visible(), "Bob email is not visible"
+    assert page.get_by_role("cell", name="alice", exact=True).is_visible(), "Alice is not visible"
+    assert page.get_by_role("cell", name="alice@gmail.com", exact=True).is_visible(), "Alice email is not visible"
