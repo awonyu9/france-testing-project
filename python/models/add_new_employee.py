@@ -1,6 +1,3 @@
-from utils import create_user
-
-
 class AddNewEmployeePage:
     def getPageInput(self, page, name):
         return page.locator('input[name="' + name + '"]')
