@@ -1,5 +1,7 @@
 from models.list_employees import ListEmployeesPage
 from models.add_new_employee import AddNewEmployeePage
+from models.edit_address import EditAddressPage
+from models.edit_employee import EditEmployeePage
 
 def test_address2_not_become_address1_pom(page):
     add_new_employee_page = AddNewEmployeePage(
@@ -12,11 +14,12 @@ def test_address2_not_become_address1_pom(page):
     list_employees_page.navigate()
     list_employees_page.edit_employee(0)
 
-    page.locator('a[href$="address"]').click()
-    address2 = page.locator('input[name="address_line2"]').input_value()
-    page.click("text='Update'")
-    page.get_by_role("link", name="Update address").click()
+    edit_employee_page = EditEmployeePage(page)
+    edit_employee_page.navigate_update_address()
+    edit_address_page = EditAddressPage(page)
+    edit_address_page.update()
+    edit_employee_page.navigate_update_address()
 
-    address1 = page.locator('input[name="address_line1"]').input_value()
-    updated_address2 = page.locator('input[name="address_line2"]').input_value()
-    assert updated_address2 != address1, f"Address 2 ('{updated_address2}') unexpectedly matches Address 1 ('{address1}')."
+    address1 = edit_address_page.get_address1()
+    updated_address2 = edit_address_page.get_address2()
+    assert updated_address2 != address1, f"Address 2 value('{updated_address2}') unexpectedly matches Address 1 value ('{address1}')."

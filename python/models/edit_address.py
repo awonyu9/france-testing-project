@@ -22,3 +22,9 @@ class EditAddressPage:
 
     def update(self):
         self.update_button.click()
+
+    def get_address1(self):
+        return self.page.locator('input[name="address_line1"]').input_value()
+    
+    def get_address2(self):
+        return self.page.locator('input[name="address_line2"]').input_value()
