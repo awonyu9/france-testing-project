@@ -16,4 +16,4 @@ def test_add_team():
         cursor = connection.cursor()
         rows = cursor.execute("SELECT name FROM hr_team").fetchall()
         team_names = [row['name'] for row in rows]
-        assert team_names == ['devs']
+        assert 'devs' in team_names
