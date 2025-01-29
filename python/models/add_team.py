@@ -1,10 +1,10 @@
-from utils import getPageInput
+from models.Page import Page
 
 
-class AddTeamPage:
+class AddTeamPage(Page):
     def __init__(self, page):
         self.page = page
-        self.name_input = getPageInput(page, "name")
+        self.name_input = self.getPageInput(page, "name")
         self.add_button = page.get_by_role("button", name="Add")
 
     def navigate(self):

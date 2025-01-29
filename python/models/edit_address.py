@@ -1,14 +1,14 @@
-from utils import getPageInput
+from models.Page import Page
 
 
-class EditAddressPage:
+class EditAddressPage(Page):
     def __init__(self, page):
         self.page = page
 
-        self.address1_input = getPageInput(page, "address_line1")
-        self.address2_input = getPageInput(page, "address_line2")
-        self.city_input = getPageInput(page, "city")
-        self.zip_code_input = getPageInput(page, "zip_code")
+        self.address1_input = self.getPageInput(page, "address_line1")
+        self.address2_input = self.getPageInput(page, "address_line2")
+        self.city_input = self.getPageInput(page, "city")
+        self.zip_code_input = self.getPageInput(page, "zip_code")
         self.update_button = page.get_by_role("button", name="Update")
 
     def navigate(self, employee_id):

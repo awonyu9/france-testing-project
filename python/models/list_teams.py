@@ -1,4 +1,7 @@
-class ListTeamsPage:
+from models.Page import Page
+
+
+class ListTeamsPage(Page):
     def __init__(self, page):
         self.page = page
 

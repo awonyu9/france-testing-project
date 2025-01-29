@@ -1,18 +1,18 @@
-from utils import getPageInput
+from models.Page import Page
 
 
-class AddNewEmployeePage:
+class AddNewEmployeePage(Page):
     def __init__(self, page):
         self.page = page
 
-        self.name_input = getPageInput(page, "name")
-        self.email_input = getPageInput(page, "email")
-        self.address1_input = getPageInput(page, "address_line1")
-        self.address2_input = getPageInput(page, "address_line2")
-        self.city_input = getPageInput(page, "city")
-        self.zip_input = getPageInput(page, "zip_code")
-        self.hiring_date_input = getPageInput(page, "hiring_date")
-        self.job_title_input = getPageInput(page, "job_title")
+        self.name_input = self.getPageInput(page, "name")
+        self.email_input = self.getPageInput(page, "email")
+        self.address1_input = self.getPageInput(page, "address_line1")
+        self.address2_input = self.getPageInput(page, "address_line2")
+        self.city_input = self.getPageInput(page, "city")
+        self.zip_input = self.getPageInput(page, "zip_code")
+        self.hiring_date_input = self.getPageInput(page, "hiring_date")
+        self.job_title_input = self.getPageInput(page, "job_title")
 
         self.add_button = page.get_by_role("button", name="Add")
 

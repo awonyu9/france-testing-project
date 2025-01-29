@@ -1,12 +1,12 @@
-from utils import getPageInput
+from models.Page import Page
 
 
-class UpdateContractPage:
+class UpdateContractPage(Page):
     def __init__(self, page):
         self.page = page
         self.user_id = page.url.split("/")[-1]
-        self.hiring_date_input = getPageInput(page, "hiring_date")
-        self.job_title_input = getPageInput(page, "job_title")
+        self.hiring_date_input = self.getPageInput(page, "hiring_date")
+        self.job_title_input = self.getPageInput(page, "job_title")
         self.update_button = page.get_by_role("button", name="Update")
 
     def navigate(self):
